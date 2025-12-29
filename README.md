@@ -84,5 +84,88 @@ Main notebooks:
     plots use in the report.
 
 
+# 4. Workflow / how to reproduce the analysis
 
+A typical workflow to reproduce the figures and numbers in the report:
+
+\tab 1. Inspect the data
+
+Open read_mosaic.ipynb.
+
+Check that mosaic.fits is in the repository root.
+
+Run the notebook to confirm the background level and general appearance.
+
+Pixel histogram and sky Gaussian
+
+Run histogram_mosaic.ipynb to:
+
+verify the sky distribution is roughly Gaussian,
+
+obtain bg and σ used for detection thresholds.
+
+Saturation and halo cleaning
+
+Open background_saturation_remove.ipynb.
+
+Run to:
+
+identify saturated cores and bright halos,
+
+apply the kNN density–based halo mask,
+
+write out mosaic_cleaned_enhanced.fits.
+
+The detection overlay plots here (before/after kNN) correspond to the
+figures showing halo removal in the report.
+
+Aperture photometry tests
+
+Run aperture photometry.ipynb.
+
+Verify that the 3″ aperture, annulus choice and background subtraction
+behave sensibly on bright, isolated objects.
+
+Main catalogue and classification
+
+Open analysis.ipynb.
+
+Choose whether to use mosaic.fits or mosaic_cleaned_enhanced.fits
+as input (the report uses the cleaned version for the final counts).
+
+Run the notebook to:
+
+detect sources using bg + 5σ,
+
+apply the kNN halo filter,
+
+perform aperture photometry for the remaining sources,
+
+classify stars vs galaxies.
+
+Number counts and fits
+
+Run results.ipynb to:
+
+build cumulative counts $\log_{10} N(<m)$ for:
+
+all sources,
+
+stars only,
+
+galaxies only;
+
+compute Poisson error bars;
+
+perform weighted linear fits to the galaxy curve over the chosen
+magnitude range (e.g. $m \in [11, 16.5]$);
+
+optionally explore the effect of changing:
+
+the magnitude range,
+
+kNN crowded fraction and grid size.
+
+This notebook generates the final plots (e.g. logN–m curves and fitted
+lines) used in the report.
 Running the notebooks in the order above should reproduce all the figures and numerical values quoted in the report.
