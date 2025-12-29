@@ -87,5 +87,5 @@ plots use in the report.
 
 
 
-# Running the notebooks in the order above should reproduce all the figures and
+Running the notebooks in the order above should reproduce all the figures and
 numerical values quoted in the report.
